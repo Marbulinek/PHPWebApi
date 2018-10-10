@@ -1,0 +1,36 @@
+<?php 
+include "config.php";
+
+class Database {    
+    private $conn;
+        
+    function __construct(){
+          $this->connect();
+    }    
+        
+    public function connect(){            
+          $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+          $this->conn->set_charset("utf8");
+          
+          /* check connection */
+          if ($this->conn->connect_errno) {
+              printf("Connect failed: %s\n", $mysqli->connect_error);
+          }
+          return $this->conn;
+    }
+ 
+    public function query($sql){ 
+          return $this->conn->query($sql);
+    }
+    
+    public function queryRetID($sql){
+          $this->query($sql);
+          return $this->conn->insert_id;
+    }
+
+    public function escape($variable){
+          return $this->conn->real_escape_string($variable);
+    }
+
+}
+?>
