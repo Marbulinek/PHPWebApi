@@ -20,7 +20,7 @@ class Database {
     }
  
     public function query($sql){ 
-          return $this->conn->query($sql);
+          $this->conn->query($sql) or trigger_error($sql);
     }
     
     public function queryRetID($sql){

@@ -1,6 +1,6 @@
 <?php
-include "core/database.php";
-include "models/usersDto.php";
+include "../core/database.php";
+include "../models/usersDto.php";
 
 //db connect
 $db = new Database();
