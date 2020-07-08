@@ -9,7 +9,6 @@ $db = new Database();
 $data = json_decode(file_get_contents('php://input'), true);
 
 $user = new UsersDto();
-$user->user_id = $data["user_id"];
 $user->name = $data["name"];
 $user->email = $data["email"];
 

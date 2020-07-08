@@ -20,7 +20,11 @@ class Database {
     }
  
     public function query($sql){ 
-          return $this->conn->query($sql);
+            $res = $this->conn->query($sql);
+            if ($res == false) {
+                  throw new Exception(sprintf("SQL Command error message: %s\n", $this->conn->error));
+            }
+            return $res;            
     }
     
     public function queryRetID($sql){
