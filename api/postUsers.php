@@ -14,5 +14,6 @@ $user->name = $data["name"];
 $user->email = $data["email"];
 
 //send to database
+$db->query("INSERT INTO `Users`(`name`,`email`) VALUES('".$user->name."', '".$user->email."')");
 print_r($user);
 ?>
