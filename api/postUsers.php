@@ -1,18 +1,21 @@
 <?php
-include "../core/database.php";
-include "../models/usersDto.php";
 
-//db connect
-$db = new Database();
+/***
+ * Example of POST
+ * 
+    [
+        {
+            "name": null,
+            "email": null,
+            "firstName": "Ljuk Biskvit",
+            "lastName": "ljuk.biskvit@gmail.com"
+        }
+    ]
+ */
 
-//post data
-$data = json_decode(file_get_contents('php://input'), true);
+include "../controls/usersControl.php";
 
-$user = new UsersDto();
-$user->name = $data["name"];
-$user->email = $data["email"];
+$usersControl = new UsersControl();
+$usersControl->postUser();
 
-//send to database
-$db->query("INSERT INTO `Users`(`name`,`email`) VALUES('".$user->name."', '".$user->email."')");
-print_r($user);
 ?>
