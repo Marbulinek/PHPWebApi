@@ -1,4 +1,5 @@
 # PHP WebApi
+[![Build Status](https://travis-ci.org/Marbulinek/PHPWebApi.svg?branch=master)](https://travis-ci.org/Marbulinek/PHPWebApi)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Example of REST in php for User data.
