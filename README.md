@@ -1,4 +1,4 @@
-# PHP WebApi
+# PHP WEBAPI
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Example of REST in php for User data.
