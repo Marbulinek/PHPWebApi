@@ -60,6 +60,7 @@ Project contains simple queries from/to database.
 ]
 ```
 
+
 # Mapping
 How to use mapping of properties? Included automapper copy all same named properties (source/destination) of objects.
 
