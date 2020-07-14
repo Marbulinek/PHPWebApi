@@ -8,12 +8,9 @@ class UsersControl extends WebApi{
     function getUsers()
     {
         $this->query = $this->db->query("SELECT * FROM `Users` ");
-        while($row = $this->query->fetch_array())
+        while($row = $this->query->fetch_array(MYSQLI_ASSOC))
         {
-            $user = new Users();
-            $user->user_id = $row["user_id"];
-            $user->name = $row["name"];
-            $user->email = $row["email"];
+            $user = $this->mapper->map($row, new Users());
 
             array_push($this->result, $user);
         }
@@ -24,10 +21,7 @@ class UsersControl extends WebApi{
     {
         $data = $this->getDataInput();
 
-        $user = new Users();
-        $user->user_id = $row["user_id"];
-        $user->name = $row["name"];
-        $user->email = $row["email"];
+        $user = $this->mapper->map($row, new Users());
 
         $this->db->query("INSERT INTO `Users` (`name`, `email`)
                      VALUES('".$user->firstName."', '".$user->email."')");
@@ -40,13 +34,9 @@ class UsersControl extends WebApi{
         $data = $this->getDataInput();
 
         $this->query = $this->db->query("SELECT * FROM `Users` WHERE `user_id` = '".$data["user_id"]."' ");
-        $row = $this->query->fetch_array();
+        $row = $this->query->fetch_array(MYSQLI_ASSOC);
         
-        $user = new Users();
-        $user->user_id = $row["user_id"];
-        $user->name = $row["name"];
-        $user->email = $row["email"];
-
+        $user = $this->mapper->map($row, new Users());
         array_push($this->result, $user);
     }
 }

@@ -1,5 +1,4 @@
 # PHP WebApi
-[![Build Status](https://travis-ci.org/Marbulinek/PHPWebApi.svg?branch=master)](https://travis-ci.org/Marbulinek/PHPWebApi)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Example of REST in php for User data.
@@ -59,4 +58,15 @@ Project contains simple queries from/to database.
         "email": "ljuk.biskvit@gmail.com"
     }
 ]
+```
+
+# Mapping
+How to use mapping of properties? Included automapper copy all same named properties (source/destination) of objects.
+
+```php
+  // we will fetch users data from db
+  $row = $this->query->fetch_array(MYSQLI_ASSOC);
+  
+  // automapper will copy same named properties from row to destination object - Users()
+  $user = $this->mapper->map($row, new Users());
 ```
