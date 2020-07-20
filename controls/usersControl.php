@@ -1,31 +1,44 @@
 <?php
 include_once "../core/webapi.php";
-include_once "../models/users.php";
+include_once "../core/repository.php";
+include_once "../models/user.php";
 
+/**
+ * Example control of user
+ */
 class UsersControl extends WebApi{
     
+    private $repository;
+
+    function __construct()
+    {
+        // create repository of USERS
+        $this->repository = new Repository(new User());
+    }
+
     // get all users
     function getUsers()
     {
-        $this->query = $this->db->query("SELECT * FROM `Users` ");
-        while($row = $this->query->fetch_array(MYSQLI_ASSOC))
-        {
-            $user = $this->mapper->map($row, new Users());
+        // prepare repository for users
+        $users = $this->repository->select()
+                                  ->build();
 
-            array_push($this->result, $user);
-        }
+        // get the result into display json property
+        array_push($this->result, $users);
     }
 
     // function for posting user
     function postUser()
     {
+        //get user from json body
         $data = $this->getDataInput();
+        
+        //map user
+        $user = $this->mapper->map($data, new User());
 
-        $user = $this->mapper->map($row, new Users());
-
-        $this->db->query("INSERT INTO `Users` (`name`, `email`)
-                     VALUES('".$user->firstName."', '".$user->email."')");
-        print_r($user);
+        //save in repository
+        $this->repository->insert($user)
+                         ->build();
     }
 
     // select user by ID
@@ -33,11 +46,41 @@ class UsersControl extends WebApi{
     {
         $data = $this->getDataInput();
 
-        $this->query = $this->db->query("SELECT * FROM `Users` WHERE `user_id` = '".$data["user_id"]."' ");
-        $row = $this->query->fetch_array(MYSQLI_ASSOC);
-        
-        $user = $this->mapper->map($row, new Users());
-        array_push($this->result, $user);
+        // prepare repository for users
+        $users = $this->repository->select("user_id, name, email")
+                                  ->where("`user_id` LIKE '".$data["user_id"]."'")
+                                  ->build();
+
+        // get the result into display json property
+        array_push($this->result, $users);
+    }
+
+    // update user by ID
+    function updateUserById()
+    {
+        //get user from json body
+        $data = $this->getDataInput();
+
+        //map user
+        $user = $this->mapper->map($data, new User());
+
+        //save in repository
+        $this->repository->update($user)
+                        ->build();
+    }
+
+    // update user by ID
+    function deleteUserById()
+    {
+        //get user from json body
+        $data = $this->getDataInput();
+    
+        //map user
+        $user = $this->mapper->map($data, new User());
+    
+        //save in repository
+        $this->repository->delete($user)
+                        ->build();
     }
 }
 ?>
