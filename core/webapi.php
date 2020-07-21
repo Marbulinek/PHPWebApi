@@ -2,8 +2,8 @@
 include_once "database.php";
 include_once "automapper.php";
 
-abstract class WebApi{
-
+abstract class WebApi
+{
     public $db;
     public $result;
     public $mapper;

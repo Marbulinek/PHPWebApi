@@ -24,10 +24,11 @@ Create model with properties user_id, name and email. Extends with Entity to sup
 include_once "../core/repository/entity.php";
 
 /** @key user_id */
- class User extends Entity {
-    public $user_id;
-    public $name;
-    public $email;
+class User extends Entity 
+{
+  public $user_id;
+  public $name;
+  public $email;
 }
 ?>
 ```
@@ -36,9 +37,7 @@ Create control - here you can manipulate data. Specify custom methods for retrie
 
 ```php
 <?php
-include_once "../core/webapi.php";
-include_once "../core/repository.php";
-include_once "../models/user.php";
+include_once "../core/autoloader.php";
 
 /**
  * Example control of user
@@ -129,6 +128,7 @@ class UsersControl extends WebApi{
 
 ### /api/getUsers.php
 ```json
+[
   {
     "user_id": "1",
     "name": "John Doe",
@@ -152,10 +152,12 @@ class UsersControl extends WebApi{
 ### /api/postUser.php
 
 ```json
-{
-  "name": "New User",
-  "email": "new.user@mail.com"
-}
+[
+  {
+    "name": "New User",
+    "email": "new.user@mail.com"
+  }
+]
 ```
 
 ## POST
@@ -163,18 +165,22 @@ class UsersControl extends WebApi{
 
 #### request
 ```json
-{
-  "user_id": 2
-}
+[
+  {
+    "user_id": 2
+  }
+]
 ```
 
 #### result
 ```json
-{
-  "user_id": "2",
-  "name": "Ljuk Biskvit",
-  "email": "ljuk.biskvit@gmail.com"
-}
+[
+  {
+    "user_id": "2",
+    "name": "Ljuk Biskvit",
+    "email": "ljuk.biskvit@gmail.com"
+  }
+]
 ```
 
 ## POST
@@ -182,10 +188,12 @@ class UsersControl extends WebApi{
 #### request
 All entity keys should be listed here (user_id) and email will be changed.
 ```json
-{
-  "user_id": "2",
-  "email": "testovic_new@gmail.com"
-}
+[
+  {
+    "user_id": "2",
+    "email": "testovic_new@gmail.com"
+  }
+]
 ```
 
 ## POST
@@ -194,10 +202,12 @@ All entity keys should be listed here (user_id) and email will be changed.
 All entity keys should be listed here (user_id) and entity will be deleted from repository
 
 ```json
-{
-  "user_id": "2",
-  "email": "testovic_new@gmail.com"
-}
+[
+  {
+    "user_id": "2",
+    "email": "testovic_new@gmail.com"
+  }
+]
 ```
 
 
