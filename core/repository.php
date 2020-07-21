@@ -52,6 +52,13 @@
             return $this;
         }
 
+        function group($params)
+        {
+            $params = $this->db->escape($params);
+            $this->outputSQL .= sprintf('GROUP BY %s', $params);
+            return $this;
+        }
+
         function insert($params)
         {
             $params = $this->db->escape($params);
