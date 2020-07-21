@@ -127,7 +127,7 @@ class UsersControl extends WebApi{
 ## GET
 
 ### /api/getUsers.php
-```json
+```javascript
 [
   {
     "user_id": "1",
@@ -151,7 +151,7 @@ class UsersControl extends WebApi{
 
 ### /api/postUser.php
 
-```json
+```javascript
 [
   {
     "name": "New User",
@@ -164,7 +164,7 @@ class UsersControl extends WebApi{
 ### /api/selectUserById.php
 
 #### request
-```json
+```javascript
 [
   {
     "user_id": 2
@@ -173,7 +173,7 @@ class UsersControl extends WebApi{
 ```
 
 #### result
-```json
+```javascript
 [
   {
     "user_id": "2",
@@ -187,7 +187,7 @@ class UsersControl extends WebApi{
 ### /api/updateUserById.php
 #### request
 All entity keys should be listed here (user_id) and email will be changed.
-```json
+```javascript
 [
   {
     "user_id": "2",
@@ -201,7 +201,7 @@ All entity keys should be listed here (user_id) and email will be changed.
 #### request
 All entity keys should be listed here (user_id) and entity will be deleted from repository
 
-```json
+```javascript
 [
   {
     "user_id": "2",
