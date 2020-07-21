@@ -40,28 +40,24 @@
 
         function where($params)
         {
-            $params = $this->db->escape($params);
             $this->outputSQL .= sprintf('WHERE %s', $params);
             return $this;
         }
 
         function order($params)
         {
-            $params = $this->db->escape($params);
             $this->outputSQL .= sprintf('ORDER BY %s', $params);
             return $this;
         }
 
         function group($params)
         {
-            $params = $this->db->escape($params);
             $this->outputSQL .= sprintf('GROUP BY %s', $params);
             return $this;
         }
 
         function insert($params)
         {
-            $params = $this->db->escape($params);
             $this->queryState = QueryState::INSERT;
             $propertiesArray = $params->getProperties();
 
@@ -88,7 +84,6 @@
 
         function update($params)
         {
-            $params = $this->db->escape($params);
             $this->queryState = QueryState::UPDATE;
             $propertiesArray = $params->getProperties();
 
@@ -131,7 +126,6 @@
 
         function delete($params)
         {
-            $params = $this->db->escape($params);
             $this->queryState = QueryState::DELETE;
             $propertiesArray = $params->getProperties();
 

@@ -1,8 +1,8 @@
 <?php
-include "../controls/usersControl.php";
+    include "../core/autoload.php";
 
-$usersControl = new UsersControl();
-$usersControl->getUsers();
+    $usersControl = new UsersControl();
+    $usersControl->getUsers();
 
-$usersControl->printHeaders();
+    $usersControl->printHeaders();
 ?>

@@ -2,7 +2,7 @@
 include_once "../core/repository/entity.php";
 
 /** @key user_id */
- class User extends Entity {
+ class Users extends Entity {
     public $user_id;
     public $name;
     public $email;

@@ -51,7 +51,7 @@ class UsersControl extends WebApi{
     function __construct()
     {
         // create repository of USERS
-        $this->repository = new Repository(new User());
+        $this->repository = new Repository(new Users());
     }
 
     // get all users
@@ -72,7 +72,7 @@ class UsersControl extends WebApi{
         $data = $this->getDataInput();
         
         //map user
-        $user = $this->mapper->map($data, new User());
+        $user = $this->mapper->map($data, new Users());
 
         //save in repository
         $this->repository->insert($user)
@@ -100,7 +100,7 @@ class UsersControl extends WebApi{
         $data = $this->getDataInput();
 
         //map user
-        $user = $this->mapper->map($data, new User());
+        $user = $this->mapper->map($data, new Users());
 
         //save in repository
         $this->repository->update($user)
@@ -114,7 +114,7 @@ class UsersControl extends WebApi{
         $data = $this->getDataInput();
     
         //map user
-        $user = $this->mapper->map($data, new User());
+        $user = $this->mapper->map($data, new Users());
     
         //save in repository
         $this->repository->delete($user)

@@ -1,19 +1,20 @@
 <?php
-include_once "../core/webapi.php";
-include_once "../core/repository.php";
-include_once "../models/user.php";
+include_once "../core/autoload.php";
 
 /**
  * Example control of user
  */
-class UsersControl extends WebApi{
+class UsersControl extends WebApi
+{
     
     private $repository;
 
     function __construct()
     {
+        parent::__construct();
+        
         // create repository of USERS
-        $this->repository = new Repository(new User());
+        $this->repository = new Repository(new Users());
     }
 
     // get all users
@@ -34,7 +35,7 @@ class UsersControl extends WebApi{
         $data = $this->getDataInput();
         
         //map user
-        $user = $this->mapper->map($data, new User());
+        $user = $this->mapper->map($data, new Users());
 
         //save in repository
         $this->repository->insert($user)
@@ -48,7 +49,7 @@ class UsersControl extends WebApi{
 
         // prepare repository for users
         $users = $this->repository->select("user_id, name, email")
-                                  ->where("`user_id` LIKE '".$data["user_id"]."'")
+                                  ->where("`user_id` LIKE '".$data["user_id"]."' ")
                                   ->build();
 
         // get the result into display json property
@@ -62,11 +63,11 @@ class UsersControl extends WebApi{
         $data = $this->getDataInput();
 
         //map user
-        $user = $this->mapper->map($data, new User());
+        $user = $this->mapper->map($data, new Users());
 
         //save in repository
         $this->repository->update($user)
-                        ->build();
+                         ->build();
     }
 
     // update user by ID
@@ -76,11 +77,11 @@ class UsersControl extends WebApi{
         $data = $this->getDataInput();
     
         //map user
-        $user = $this->mapper->map($data, new User());
+        $user = $this->mapper->map($data, new Users());
     
         //save in repository
         $this->repository->delete($user)
-                        ->build();
+                         ->build();
     }
 }
 ?>
