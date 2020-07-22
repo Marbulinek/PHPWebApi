@@ -2,7 +2,7 @@
 /**
  * Example control of user
  */
-class UsersControl extends WebApi
+class UsersController extends WebApi
 {
     
     private $repository;

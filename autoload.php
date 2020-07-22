@@ -8,10 +8,10 @@
         }
     }
 
-    function autoloadControls($className)
+    function autoloadControllers($className)
     {
         $className = strtolower($className);
-        $filename = "../controls/" . $className . ".php";
+        $filename = "../controllers/" . $className . ".php";
         if (is_readable($filename)) {
             include_once $filename;
         }
@@ -38,5 +38,5 @@
     spl_autoload_register("autoloadCore");
     spl_autoload_register("autoloadRepository");
     spl_autoload_register("autoloadModels");
-    spl_autoload_register("autoloadControls");
+    spl_autoload_register("autoloadControllers");
 ?>
