@@ -1,6 +1,6 @@
 # PHP WEBAPI
  [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/Marbulinek/PHPWebApi)
- 
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![GitHub contributors](https://img.shields.io/github/contributors/Marbulinek/PHPWebApi.svg)](https://GitHub.com/Marbulinek/PHPWebApi/graphs/contributors/) [![GitHub issues](https://img.shields.io/github/issues/Marbulinek/PHPWebApi.svg)](https://GitHub.com/Marbulinek/PHPWebApi/issues/) 
 
 Example of REST in php for User data.
@@ -23,8 +23,6 @@ Create model with properties user_id, name and email. Extends with Entity to sup
 
 ```php
 <?php 
-include_once "../core/repository/entity.php";
-
 /** @key user_id */
 class User extends Entity 
 {
@@ -39,8 +37,6 @@ Create control - here you can manipulate data. Specify custom methods for retrie
 
 ```php
 <?php
-include_once "../core/autoloader.php";
-
 /**
  * Example control of user
  */

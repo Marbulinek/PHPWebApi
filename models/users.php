@@ -1,5 +1,4 @@
 <?php 
-include_once "../core/repository/entity.php";
 
 /** @key user_id */
 class Users extends Entity

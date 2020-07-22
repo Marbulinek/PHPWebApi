@@ -2,6 +2,5 @@
     include_once "../autoload.php";
     $usersControl = new UsersControl();
     $usersControl->getUsers();
-
     $usersControl->printHeaders();
 ?>
