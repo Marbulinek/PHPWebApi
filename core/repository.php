@@ -1,8 +1,4 @@
 <?php
-    include_once "database.php";
-    include_once "automapper.php";
-    include_once "repository/queryState.php";
-    
     class Repository{
         
         public $repository;

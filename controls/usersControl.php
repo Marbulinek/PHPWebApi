@@ -1,6 +1,4 @@
 <?php
-include_once "../core/autoload.php";
-
 /**
  * Example control of user
  */
