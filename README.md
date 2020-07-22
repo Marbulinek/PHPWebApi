@@ -1,5 +1,7 @@
 # PHP WEBAPI
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/Marbulinek/PHPWebApi)
+ 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![GitHub contributors](https://img.shields.io/github/contributors/Marbulinek/PHPWebApi.svg)](https://GitHub.com/Marbulinek/PHPWebApi/graphs/contributors/) [![GitHub issues](https://img.shields.io/github/issues/Marbulinek/PHPWebApi.svg)](https://GitHub.com/Marbulinek/PHPWebApi/issues/) 
 
 Example of REST in php for User data.
 There is SQL script called DatabaseMock.sql for database table "Test" which you need to create.
