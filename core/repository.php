@@ -25,12 +25,12 @@
             foreach ($params as $key=>$value) 
             {      
                     $arrayKey = trim(current($params));
-                    $columns .= "`".$arrayKey."`," . " ";
+                    $columns .= $arrayKey.", ";
                     next($params);
             }
             $columns = trim(rtrim($columns, ", "));
 
-            $this->outputSQL = sprintf('SELECT %s FROM `%s` ', $columns, get_class($this->repository));
+            $this->outputSQL = sprintf('SELECT %s FROM %s ', $columns, get_class($this->repository));
             return $this;
         }
 
@@ -64,7 +64,7 @@
                 $arrayKey = key($propertiesArray);
 
                 if(current($propertiesArray) != null){
-                    $columns .= "`".$arrayKey."`," . " ";
+                    $columns .= $arrayKey.", ";
                     $values .= "\"".current($propertiesArray)."\"," . " ";
                 }
 
@@ -74,7 +74,7 @@
             $columns = rtrim($columns, ", ");
             $values = rtrim($values, ", ");
 
-            $this->outputSQL = sprintf("INSERT INTO `%s` (%s) VALUES ( %s )", get_class($this->repository), $columns, $values);
+            $this->outputSQL = sprintf("INSERT INTO %s (%s) VALUES ( %s )", get_class($this->repository), $columns, $values);
             return $this;
         }
 
@@ -98,7 +98,7 @@
                 }else{
                     if($arrayValue != null)
                     {
-                        $sql .= "`".$arrayKey."` = \"".$arrayValue."\"," . " ";
+                        $sql .= $arrayKey." = \"".$arrayValue."\"," . " ";
                     }
                 }
 
@@ -106,12 +106,12 @@
             }
             $sql = rtrim($sql, ", ");
 
-            $this->outputSQL = sprintf("UPDATE `%s` SET %s", get_class($this->repository), $sql);
+            $this->outputSQL = sprintf("UPDATE %s SET %s", get_class($this->repository), $sql);
 
             $idsString = null;
             for($i = 0; $i < count($foundIds); $i++)
             {
-                $idsString .= sprintf("`%s` = \"%s\" AND ", $id[$i], $foundIds[$i]);
+                $idsString .= sprintf("%s = \"%s\" AND ", $id[$i], $foundIds[$i]);
             }
         
             $idsString = rtrim($idsString, "AND ");
@@ -140,7 +140,7 @@
                 }else{
                     if($arrayValue != null)
                     {
-                        $sql .= "`".$arrayKey."` = \"".$arrayValue."\"," . " ";
+                        $sql .= $arrayKey." = \"".$arrayValue."\"," . " ";
                     }
                 }
 
@@ -148,12 +148,12 @@
             }
             $sql = rtrim($sql, ", ");
 
-            $this->outputSQL = sprintf("DELETE FROM `%s`", get_class($this->repository), $sql);
+            $this->outputSQL = sprintf("DELETE FROM %s", get_class($this->repository), $sql);
 
             $idsString = null;
             for($i = 0; $i < count($foundIds); $i++)
             {
-                $idsString .= sprintf("`%s` = \"%s\" AND ", $id[$i], $foundIds[$i]);
+                $idsString .= sprintf("%s = \"%s\" AND ", $id[$i], $foundIds[$i]);
             }
         
             $idsString = rtrim($idsString, "AND ");
