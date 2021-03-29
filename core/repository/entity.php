@@ -1,11 +1,17 @@
 <?php
 class Entity
 {
+    /**
+     * Returning properties
+     */
     public function getProperties() 
     {
         return get_object_vars($this);
     }
 
+    /**
+     * Getting ID from entity
+     */
     public function getID()
     {
         $result = "";
@@ -22,6 +28,9 @@ class Entity
         return $comment;
     }
 
+    /**
+     * Helper method to trim comment
+     */
     private function commentTrim($param)
     {
         return trim(rtrim($param, "*/"));

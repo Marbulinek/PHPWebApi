@@ -1,7 +1,6 @@
 <?php
     function autoloadModels($className)
     {
-        $className = strtolower($className);
         $filename = "../models/" . $className . ".php";
         if (is_readable($filename)) {
             include_once $filename;
@@ -10,7 +9,6 @@
 
     function autoloadControllers($className)
     {
-        $className = strtolower($className);
         $filename = "../controllers/" . $className . ".php";
         if (is_readable($filename)) {
             include_once $filename;
@@ -19,7 +17,6 @@
 
     function autoloadCore($className)
     {
-        $className = strtolower($className);
         $filename = "../core/" . $className . ".php";
         if (is_readable($filename)) {
             include_once $filename;
@@ -28,7 +25,6 @@
 
     function autoloadRepository($className)
     {
-        $className = strtolower($className);
         $filename = "../core/repository/" . $className . ".php";
         if (is_readable($filename)) {
             include_once $filename;

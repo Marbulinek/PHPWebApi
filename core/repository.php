@@ -1,4 +1,7 @@
 <?php
+    /**
+     * Repository class
+     */
     class Repository{
         
         public $repository;
@@ -14,6 +17,9 @@
             $this->mapper = new Automapper();
         }
 
+        /**
+         * Repository SELECT query
+         */
         function select($params = "*")
         {
             $params = $this->db->escape($params);
@@ -30,28 +36,40 @@
             }
             $columns = trim(rtrim($columns, ", "));
 
-            $this->outputSQL = sprintf('SELECT %s FROM %s ', $columns, get_class($this->repository));
+            $this->outputSQL = sprintf('SELECT %s FROM %s ', $columns, strtolower(get_class($this->repository)));
             return $this;
         }
 
+        /**
+         * Repository WHERE query
+         */
         function where($params)
         {
             $this->outputSQL .= sprintf('WHERE %s', $params);
             return $this;
         }
 
+        /**
+         * Repository ORDER query
+         */
         function order($params)
         {
             $this->outputSQL .= sprintf('ORDER BY %s', $params);
             return $this;
         }
 
+        /**
+         * Repository GROUP query
+         */
         function group($params)
         {
             $this->outputSQL .= sprintf('GROUP BY %s', $params);
             return $this;
         }
 
+        /**
+         * Repository INSERT query
+         */
         function insert($params)
         {
             $this->queryState = QueryState::INSERT;
@@ -74,10 +92,13 @@
             $columns = rtrim($columns, ", ");
             $values = rtrim($values, ", ");
 
-            $this->outputSQL = sprintf("INSERT INTO %s (%s) VALUES ( %s )", get_class($this->repository), $columns, $values);
+            $this->outputSQL = sprintf("INSERT INTO %s (%s) VALUES ( %s )", strtolower(get_class($this->repository)), $columns, $values);
             return $this;
         }
 
+        /**
+         * Repository UPDATE query
+         */
         function update($params)
         {
             $this->queryState = QueryState::UPDATE;
@@ -106,7 +127,7 @@
             }
             $sql = rtrim($sql, ", ");
 
-            $this->outputSQL = sprintf("UPDATE %s SET %s", get_class($this->repository), $sql);
+            $this->outputSQL = sprintf("UPDATE %s SET %s", strtolower(get_class($this->repository)), $sql);
 
             $idsString = null;
             for($i = 0; $i < count($foundIds); $i++)
@@ -120,6 +141,9 @@
             return $this;
         }
 
+        /**
+         * Repository DELETE query
+         */
         function delete($params)
         {
             $this->queryState = QueryState::DELETE;
@@ -148,7 +172,7 @@
             }
             $sql = rtrim($sql, ", ");
 
-            $this->outputSQL = sprintf("DELETE FROM %s", get_class($this->repository), $sql);
+            $this->outputSQL = sprintf("DELETE FROM %s", strtolower(get_class($this->repository)), $sql);
 
             $idsString = null;
             for($i = 0; $i < count($foundIds); $i++)
@@ -162,6 +186,9 @@
             return $this;
         }
 
+        /**
+         * Repository build the query
+         */
         function build()
         {
             $result = [];

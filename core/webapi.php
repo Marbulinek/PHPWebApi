@@ -1,4 +1,7 @@
 <?php
+    /**
+     * Abstract WebApi class
+     */
     abstract class WebApi
     {
         public $db;
@@ -9,7 +12,7 @@
         {
             $this->db = new Database();
             $this->result = array();
-            $this->mapper = new Automapper();
+            $this->mapper = new AutoMapper();
         }
 
         /**
