@@ -213,10 +213,12 @@ All entity keys should be listed here (user_id) and entity will be deleted from 
 How to use mapping of properties? Included automapper copy all same named properties (source/destination) of objects.
 
 ```php
+?>
 // we will fetch users data from db
 $row = $this->query->fetch_array(MYSQLI_ASSOC);
  
 // automapper will copy same named properties from row to destination object - Users()
 $user = $this->mapper->map($row, new Users());
+?>
 ```
 
