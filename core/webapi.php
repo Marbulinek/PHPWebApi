@@ -31,5 +31,12 @@
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode($this->result, JSON_UNESCAPED_UNICODE);
         }
+
+        /**
+         * Get result data
+         */
+        function getResult($data){
+            $this->result = $data;
+        }
     }
 ?>

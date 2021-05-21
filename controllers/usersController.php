@@ -23,7 +23,7 @@ class UsersController extends WebApi
                                   ->build();
 
         // get the result into display json property
-        array_push($this->result, $users);
+        $this->getResult($users);
     }
 
     // function for posting user
@@ -51,7 +51,7 @@ class UsersController extends WebApi
                                   ->build();
 
         // get the result into display json property
-        array_push($this->result, $users);
+        $this->getResult($user);
     }
 
     // update user by ID
