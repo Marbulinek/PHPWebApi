@@ -14,7 +14,7 @@ class AutoMapper
     function map($sourceObject, $destinationClass)
     {
         foreach ($sourceObject as $key=>$value) {
-            $destinationClass->$key = $sourceObject[$key];
+            $destinationClass->$key = $value;
         }
         return $destinationClass;
     }

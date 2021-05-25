@@ -19,7 +19,8 @@ Project contains simple queries from/to database.
 
 
 # EXAMPLE
-Create model with properties user_id, name and email. Extends with Entity to support Repository. With class comment @key you will specify key[s] for database. Multiple keys will be delimited by ",".
+Create model with properties user_id, name and email. Extends with Entity to support Repository. With class comment @key you will specify key[s] for database. Multiple keys are delimited by ",".
+PhpWebApi now supports module for Authentification tokens in request.
 
 ```php
 <?php 
@@ -61,6 +62,21 @@ class UsersControl extends WebApi{
         // get the result into display json property
         $this->getResult($user);
     }
+
+    // return all users, but request need to contain authentification token in headers
+    function getUsersAuth()
+    {
+        // we need to set correct BEARER token
+        $data = $this->getAuthDataInput();
+    
+        // prepare repository for users
+        $users = $this->repository->select()
+                                   ->build();
+            
+        // get the result into display json property
+        $this->getResult($users);
+    }
+
 
     // function for posting user
     function postUser()
@@ -208,9 +224,11 @@ All entity keys should be listed here (user_id) and entity will be deleted from 
 ]
 ```
 
+# Authentification
+There is new modul Authentificaion, which is authentificating request to api. Database table *auth* where are tokens stored. In Authentification.php file there are prepared methods for verify and regenerate tokens. Just implements custom logic and use it.
 
 # Mapping
-How to use mapping of properties? Included automapper copy all same named properties (source/destination) of objects.
+How to use mapping of properties? Included automapper copy all same named properties (source/destination) of objects. Now supporting mapping just 1:1 object. Arrays are not supported nowadays.
 
 ```php
 <?php

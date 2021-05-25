@@ -26,6 +26,20 @@ class UsersController extends WebApi
         $this->getResult($users);
     }
 
+    // return all users, but request need to contain authentification token
+    function getUsersAuth()
+    {
+        // we need to set correct BEARER token
+        $data = $this->getAuthDataInput();
+    
+        // prepare repository for users
+        $users = $this->repository->select()
+                                   ->build();
+            
+        // get the result into display json property
+        $this->getResult($users);
+    }
+
     // function for posting user
     function postUser()
     {

@@ -31,8 +31,17 @@
         }
     }
 
+    function autoloadAuth($className)
+    {
+        $filename = "../core/auth/" . $className . ".php";
+        if (is_readable($filename)) {
+            include_once $filename;
+        }
+    }
+
     spl_autoload_register("autoloadCore");
     spl_autoload_register("autoloadRepository");
+    spl_autoload_register("autoloadAuth");
     spl_autoload_register("autoloadModels");
     spl_autoload_register("autoloadControllers");
 ?>
