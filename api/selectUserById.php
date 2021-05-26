@@ -2,5 +2,5 @@
     include_once "../autoload.php";
     $usersControl = new UsersController();
     $usersControl->selectUserById();
-    $usersControl->printHeaders();
+    $usersControl->getResponse();
 ?>
