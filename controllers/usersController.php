@@ -26,6 +26,20 @@ class UsersController extends WebApi
         $this->setResult($users);
     }
 
+    function login()
+    {
+        // get data from request
+        $data = $this->getDataInput();
+
+        $user = $this->repository->select()
+                         ->join("Auth", "`Users`.`auth_id`=`Auth`.`auth_id`")
+                         ->where("`email` LIKE '".$data["email"]."' ")
+                         ->build();
+
+        // set the result into display json property
+        $this->setResult($user);
+    }
+
     // return all users, but request need to contain authentification token
     function getUsersAuth()
     {

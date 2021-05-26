@@ -41,6 +41,15 @@
         }
 
         /**
+         * Repository JOIN
+         */
+        function join($joinTable, $params)
+        {
+            $this->outputSQL .= sprintf('JOIN %s ON %s', $joinTable, $params);
+            return $this;
+        }
+
+        /**
          * Repository WHERE query
          */
         function where($params)
