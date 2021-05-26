@@ -1,7 +1,7 @@
 <?php
     function autoload_authentification_implementation($className)
     {
-        $filename = "../moduls/authentification/implementation/" . $className . ".php";
+        $filename = "../modules/authentification/implementation/" . $className . ".php";
         if (is_readable($filename)) {
             include_once $filename;
         }
@@ -9,7 +9,7 @@
 
     function autoload_authentification_interfaces($className)
     {
-        $filename = "../moduls/authentification/interfaces/" . $className . ".php";
+        $filename = "../modules/authentification/interfaces/" . $className . ".php";
         if (is_readable($filename)) {
             include_once $filename;
         }
@@ -17,7 +17,7 @@
 
     function autoload_authentification_models($className)
     {
-        $filename = "../moduls/authentification/models/" . $className . ".php";
+        $filename = "../modules/authentification/models/" . $className . ".php";
         if (is_readable($filename)) {
             include_once $filename;
         }

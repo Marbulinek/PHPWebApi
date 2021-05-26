@@ -37,5 +37,5 @@
     spl_autoload_register("autoloadControllers");
 
     // add autoloads from modules
-    include_once "moduls/authentification/autoload.php";
+    include_once "modules/authentification/autoload.php";
 ?>
