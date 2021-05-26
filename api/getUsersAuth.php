@@ -3,5 +3,4 @@
     $usersControl = new UsersController();
     $usersControl->getUsersAuth();
     $usersControl->getResponse();
-
 ?>
