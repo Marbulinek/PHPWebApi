@@ -30,6 +30,9 @@ class User extends Entity
   public $user_id;
   public $name;
   public $email;
+  
+  // authentification token
+  public $auth_id;
 }
 ?>
 ```
