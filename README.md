@@ -59,8 +59,8 @@ class UsersControl extends WebApi{
         $users = $this->repository->select()
                                   ->build();
 
-        // get the result into display json property
-        $this->getResult($user);
+        // set the result into display json property
+        $this->setResult($user);
     }
 
     // return all users, but request need to contain authentification token in headers
@@ -73,8 +73,8 @@ class UsersControl extends WebApi{
         $users = $this->repository->select()
                                    ->build();
             
-        // get the result into display json property
-        $this->getResult($users);
+        // set the result into display json property
+        $this->setResult($users);
     }
 
 
@@ -102,8 +102,8 @@ class UsersControl extends WebApi{
                                   ->where("`user_id` LIKE '".$data["user_id"]."'")
                                   ->build();
 
-        // get the result into display json property
-        $this->getResult($user);
+        // set the result into display json property
+        $this->setResult($user);
     }
 
     // update user by ID

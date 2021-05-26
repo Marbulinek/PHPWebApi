@@ -2,7 +2,7 @@
 /**
  * Authentification class
  */
-class Authentification
+class Authentification implements IAuthentification
 {
     private $repository;
     private $validationQuery;
@@ -17,10 +17,9 @@ class Authentification
     /**
      * Validate request with token
      */
-    function validate()
+    public function validate()
     {
         $token = $this->getBearerToken();
-
         $auth = $this->repository->select()
                                  ->where(" `token` LIKE '".$token."' AND `expiration` > NOW()")
                                  ->build();
@@ -35,52 +34,61 @@ class Authentification
     /**
      * Refresh expiration data
      */
-    function refresh()
+    public function refresh()
     {
-        $token = $this->getBearerToken();
-        $auth = $this->repository->select()
-                        ->where(" `token` LIKE '".$token."'")
-                        ->build();
+        $authEntity = $this->getActualAuthEntity();
 
-        $auth = $auth[0];
+        $authEntity->expiration = $this->generateExpirationDateTime();
 
-        $resAuth = $this->mapper->map($auth, new Auth());
-
-        $date = new DateTime();
-        $date->add(new DateInterval('PT1H'));
-
-        $resAuth->expiration = $date->format('Y-m-d H:i:s');
-        
-        $this->repository->update($resAuth)
+        $this->repository->update($authEntity)
                          ->build();
     }
     
     /**
      * Generate token and expiration datetime
      */
-    public function generateToken()
+    public function generate()
     {
-        $token = $this->getBearerToken();
-        $tokenNew = bin2hex(random_bytes(16));
-        $date = new DateTime();
-        $date->add(new DateInterval('PT1H'));
+        $authEntity = $this->getActualAuthEntity();
 
+        $authEntity->expiration = $this->generateExpirationDateTime();
+        $authEntity->token = $this->generateTokenHash();
+
+        $this->repository->update($authEntity)
+                         ->build();
+    }
+
+    private function getActualAuthEntity()
+    {
+        // retrieve actual token
+        $token = $this->getBearerToken();
+
+        // select authentification entity from db
         $auth = $this->repository->select()
                 ->where(" `token` LIKE '".$token."' ")
                 ->build();
-
-        $auth = $auth[0];
         
+        $auth = $auth[0];
         $auth = $this->mapper->map($auth, new Auth());
+        return $auth;
+    }
 
+    /**
+     * Generate expiration datetime
+     */
+    private function generateExpirationDateTime()
+    {
         $date = new DateTime();
         $date->add(new DateInterval('PT1H'));
+        return $date->format('Y-m-d H:i:s');
+    }
 
-        $auth->expiration = $date->format('Y-m-d H:i:s');
-        $auth->token = $tokenNew;
-
-        $this->repository->update($auth)
-                         ->build();
+    /**
+     * Generate token hash
+     */
+    private function generateTokenHash()
+    {
+        return bin2hex(random_bytes(16));
     }
 
     /**
