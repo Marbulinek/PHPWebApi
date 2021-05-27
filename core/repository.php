@@ -128,7 +128,9 @@
                 }else{
                     if($arrayValue != null)
                     {
-                        $sql .= $arrayKey." = \"".$arrayValue."\"," . " ";
+                        if(!is_object($arrayValue)){
+                            $sql .= $arrayKey." = \"".$arrayValue."\"," . " ";
+                        }
                     }
                 }
 
@@ -206,7 +208,8 @@
             {
                 case QueryState::SELECT: 
                     $query = $this->db->query($this->outputSQL);
-                    while($row = $query->fetch_array(MYSQLI_ASSOC)){
+                    while($row = $query->fetch_array(MYSQLI_ASSOC))
+                    {
                         $result[] = $this->mapper->map($row, new $this->repository);
                     }
                 break;
