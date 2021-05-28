@@ -48,9 +48,6 @@ Create control - here you can manipulate data. Specify custom methods for retrie
  */
 class UsersController extends WebApi
 {
-    
-    private $repository;
-    private $authRepository;
     private $userLogicService;
 
     function __construct()
