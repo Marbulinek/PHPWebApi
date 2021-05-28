@@ -131,35 +131,75 @@ class UsersController extends WebApi
 ### /api/getUsers.php
 ```javascript
 [
-  {
-    "user_id": "1",
-    "name": "John Doe",
-    "email": "john.doe@mail.com"
-  },
-  {
-    "user_id": "2",
-    "name": "Ljuk Biskvit",
-    "email": "ljuk.biskvit@gmail.com"
-  },
-  {
-    "user_id": "3",
-    "name": "Domca Tofinka",
-    "email": "domca.tofinka@yahoo.com"
-  }
+    {
+        "user_id": "1",
+        "name": "John Doe",
+        "email": "john.doe@gmail.com",
+        "auth_id": "26",
+        "auth": {
+            "auth_id": "26",
+            "token": "253fa15166a546ed05031a72e09f96d9",
+            "expiration": "2021-05-28 15:15:25"
+        }
+    },
+    {
+        "user_id": "2",
+        "name": "Ljuk Biskvit",
+        "email": "testovic_new@gmail.com",
+        "auth_id": "2",
+        "auth": {
+            "auth_id": "2",
+            "token": "583da5a5427ea0d0121f9116cfbac05b",
+            "expiration": "2021-05-30 00:00:00"
+        }
+    },
+    {
+        "user_id": "3",
+        "name": "Domca Tofinka",
+        "email": "domca.tofinka@yahoo.com",
+        "auth_id": "3",
+        "auth": {
+            "auth_id": "3",
+            "token": "040c821e2be47d0d38455bd3ddd7b0d2",
+            "expiration": "2021-05-30 00:00:00"
+        }
+    }
 ]
 ```
 
 ## POST
+### /api/login.php
+
+#### request
+```javascript
+{
+  "email": "john.doe@gmail.com"
+}
+```
+
+#### result
+```javascript
+{
+    "user_id": "1",
+    "name": "John Doe",
+    "email": "john.doe@gmail.com",
+    "auth_id": "26",
+    "auth": {
+        "auth_id": "26",
+        "token": "253fa15166a546ed05031a72e09f96d9",
+        "expiration": "2021-05-28 15:15:25"
+    }
+}
+```
+
 
 ### /api/postUser.php
 
 ```javascript
-[
-  {
-    "name": "New User",
-    "email": "new.user@mail.com"
-  }
-]
+{
+  "name": "New User",
+  "email": "new.user@mail.com"
+}
 ```
 
 ## POST
@@ -167,22 +207,18 @@ class UsersController extends WebApi
 
 #### request
 ```javascript
-[
-  {
-    "user_id": 2
-  }
-]
+{
+  "user_id": 2
+}
 ```
 
 #### result
 ```javascript
-[
-  {
-    "user_id": "2",
-    "name": "Ljuk Biskvit",
-    "email": "ljuk.biskvit@gmail.com"
-  }
-]
+{
+  "user_id": "2",
+  "name": "Ljuk Biskvit",
+  "email": "ljuk.biskvit@gmail.com"
+}
 ```
 
 ## POST
@@ -190,12 +226,10 @@ class UsersController extends WebApi
 #### request
 All entity keys should be listed here (user_id) and email will be changed.
 ```javascript
-[
-  {
-    "user_id": "2",
-    "email": "testovic_new@gmail.com"
-  }
-]
+{
+  "user_id": "2",
+  "email": "testovic_new@gmail.com"
+}
 ```
 
 ## POST
@@ -204,12 +238,10 @@ All entity keys should be listed here (user_id) and email will be changed.
 All entity keys should be listed here (user_id) and entity will be deleted from repository
 
 ```javascript
-[
-  {
-    "user_id": "2",
-    "email": "testovic_new@gmail.com"
-  }
-]
+{
+  "user_id": "2",
+  "email": "testovic_new@gmail.com"
+}
 ```
 
 # Authentification
