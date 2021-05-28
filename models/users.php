@@ -1,6 +1,8 @@
 <?php 
 
-/** @key user_id */
+/** 
+ * @key user_id 
+ */
 class Users extends Entity
 {
     public $user_id;
@@ -9,5 +11,6 @@ class Users extends Entity
 
     // authentification token
     public $auth_id;
+    public $auth;
 }
 ?>

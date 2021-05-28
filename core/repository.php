@@ -45,7 +45,7 @@
          */
         function join($joinTable, $params)
         {
-            $this->outputSQL .= sprintf('JOIN %s ON %s', $joinTable, $params);
+            $this->outputSQL .= sprintf('JOIN %s ON %s ', $joinTable, $params);
             return $this;
         }
 
@@ -54,7 +54,7 @@
          */
         function where($params)
         {
-            $this->outputSQL .= sprintf('WHERE %s', $params);
+            $this->outputSQL .= sprintf('WHERE %s ', $params);
             return $this;
         }
 
@@ -63,7 +63,7 @@
          */
         function order($params)
         {
-            $this->outputSQL .= sprintf('ORDER BY %s', $params);
+            $this->outputSQL .= sprintf('ORDER BY %s ', $params);
             return $this;
         }
 
@@ -72,7 +72,7 @@
          */
         function group($params)
         {
-            $this->outputSQL .= sprintf('GROUP BY %s', $params);
+            $this->outputSQL .= sprintf('GROUP BY %s ', $params);
             return $this;
         }
 
@@ -225,7 +225,7 @@
                 case QueryState::DELETE:
                     $this->db->query($this->outputSQL);
             }
-
+            
             return $result;
         }
     }

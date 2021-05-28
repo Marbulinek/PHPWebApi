@@ -6,6 +6,8 @@ class UsersController extends WebApi
 {
     
     private $repository;
+    private $authRepository;
+    private $userLogicService;
 
     function __construct()
     {
@@ -13,15 +15,15 @@ class UsersController extends WebApi
         
         // create repository of USERS
         $this->repository = new Repository(new Users());
+        $this->authRepository = new Repository(new Auth());
+        $this->userLogicService = new UserLogicService();
     }
 
     // get all users
     function getUsers()
     {
         // prepare repository for users
-        $users = $this->repository->select()
-                                  ->build();
-
+        $users = $this->userLogicService->getUsers();
         // set the result into display json property
         $this->setResult($users);
     }
@@ -30,12 +32,7 @@ class UsersController extends WebApi
     {
         // get data from request
         $data = $this->getDataInput();
-
-        $user = $this->repository->select()
-                         ->join("Auth", "`Users`.`auth_id`=`Auth`.`auth_id`")
-                         ->where("`email` LIKE '".$data["email"]."' ")
-                         ->build();
-
+        $user = $this->userLogicService->processLogin($data["email"]);
         // set the result into display json property
         $this->setResult($user);
     }
@@ -44,12 +41,8 @@ class UsersController extends WebApi
     function getUsersAuth()
     {
         // we need to set correct BEARER token
-        $data = $this->getAuthDataInput();
-    
-        // prepare repository for users
-        $users = $this->repository->select()
-                                   ->build();
-            
+        $this->getAuthDataInput();
+        $users = $this->userLogicService->getUsers();
         // set the result into display json property
         $this->setResult($users);
     }
@@ -59,25 +52,15 @@ class UsersController extends WebApi
     {
         //get user from json body
         $data = $this->getDataInput();
-        
-        //map user
-        $user = $this->mapper->map($data, new Users());
-
-        //save in repository
-        $this->repository->insert($user)
-                         ->build();
+        $this->userLogicService->postUser($data);
     }
 
     // select user by ID
     function selectUserById()
     {
         $data = $this->getDataInput();
-
         // prepare repository for users
-        $users = $this->repository->select("user_id, name, email")
-                                  ->where("`user_id` LIKE '".$data["user_id"]."' ")
-                                  ->build();
-
+        $user = $this->userLogicService->selectUserById($data);
         // set the result into display json property
         $this->setResult($user);
     }
@@ -87,13 +70,7 @@ class UsersController extends WebApi
     {
         //get user from json body
         $data = $this->getDataInput();
-
-        //map user
-        $user = $this->mapper->map($data, new Users());
-
-        //save in repository
-        $this->repository->update($user)
-                         ->build();
+        $user = $this->userLogicService->updateUserById($data);
     }
 
     // update user by ID
@@ -101,13 +78,7 @@ class UsersController extends WebApi
     {
         //get user from json body
         $data = $this->getDataInput();
-    
-        //map user
-        $user = $this->mapper->map($data, new Users());
-    
-        //save in repository
-        $this->repository->delete($user)
-                         ->build();
+        $user = $this->userLogicService->updateUserById($data);
     }
 }
 ?>

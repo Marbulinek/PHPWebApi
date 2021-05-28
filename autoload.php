@@ -31,10 +31,19 @@
         }
     }
 
+    function autoloadServices($className)
+    {
+        $filename = "../services/" . $className . ".php";
+        if (is_readable($filename)) {
+            include_once $filename;
+        }
+    }
+
     spl_autoload_register("autoloadCore");
     spl_autoload_register("autoloadRepository");
     spl_autoload_register("autoloadModels");
     spl_autoload_register("autoloadControllers");
+    spl_autoload_register("autoloadServices");
 
     // add autoloads from modules
     include_once "modules/authentification/autoload.php";

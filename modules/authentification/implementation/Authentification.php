@@ -47,30 +47,39 @@ class Authentification implements IAuthentification
     /**
      * Generate token and expiration datetime
      */
-    public function generate()
+    public function generate($auth)
     {
-        $authEntity = $this->getActualAuthEntity();
-
-        $authEntity->expiration = $this->generateExpirationDateTime();
-        $authEntity->token = $this->generateTokenHash();
-
-        $this->repository->update($authEntity)
-                         ->build();
+        if($auth != null){
+            if($auth->token == null){
+                /// update authorization entity
+                $auth->expiration = $this->generateExpirationDateTime();
+                $auth->token = $this->generateTokenHash();
+                return $auth;
+            }
+        }else{
+            $authEntity = new Auth();
+            $authEntity->expiration = $this->generateExpirationDateTime();
+            $authEntity->token = $this->generateTokenHash();
+            return $authEntity;
+        }
     }
 
     private function getActualAuthEntity()
     {
         // retrieve actual token
         $token = $this->getBearerToken();
+        if($token != null){
+            // select authentification entity from db
+            $auth = $this->repository->select()
+                    ->where(" `token` LIKE '".$token."' ")
+                    ->build();
 
-        // select authentification entity from db
-        $auth = $this->repository->select()
-                ->where(" `token` LIKE '".$token."' ")
-                ->build();
-        
-        $auth = $auth[0];
-        $auth = $this->mapper->map($auth, new Auth());
-        return $auth;
+            $auth = $auth[0];
+            $auth = $this->mapper->map($auth, new Auth());
+            return $auth;
+        }else{
+            return null;
+        }
     }
 
     /**

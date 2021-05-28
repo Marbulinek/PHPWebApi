@@ -6,6 +6,6 @@ interface IAuthentification
 {
     public function validate();
     public function refresh();
-    public function generate();
+    public function generate($auth);
 }
 ?>

@@ -28,11 +28,35 @@ class AutoMapper
     {
         foreach ($sourceObject as $key=>$value) 
         {
-            if(property_exists($destinationClass, $key)){
+            if(property_exists($destinationClass, $key))
+            {
                 $destinationClass->$key = $value;
             }
         }
         return $destinationClass;
     }
+
+    /**
+     * Mapping together with all nested properties
+     */
+    function mapNested($sourceObject, $destinationClass)
+    {
+        $parentClass = $this->mapExactly($sourceObject, $destinationClass);
+        $properties = get_object_vars($destinationClass);
+        foreach($properties as $key => $property){
+            if($property == null)
+            {
+                //check if class exists
+                if(class_exists($key))
+                {
+                    $nestedClass = new $key;
+                    $parentClass = $this->mapExactly($sourceObject, $nestedClass);
+                }
+                $destinationClass->$key = $parentClass;
+            }
+        }
+        return $destinationClass;
+    }
+
 }
 ?>
