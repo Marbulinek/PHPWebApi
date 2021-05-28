@@ -6,8 +6,6 @@ class UsersController extends WebApi
 {
     
     private $repository;
-    private $authRepository;
-    private $userLogicService;
 
     function __construct()
     {
