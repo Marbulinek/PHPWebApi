@@ -56,10 +56,7 @@ class UsersController extends WebApi
     function __construct()
     {
         parent::__construct();
-        
-        // create repository of USERS
-        $this->repository = new Repository(new Users());
-        $this->authRepository = new Repository(new Auth());
+
         $this->userLogicService = new UserLogicService();
     }
 
