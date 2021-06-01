@@ -68,7 +68,7 @@ class UsersController extends WebApi
         $user = $this->userLogicService->updateUserById($data);
     }
 
-    // update user by ID
+    // delete user by ID
     function deleteUserById()
     {
         //get user from json body
