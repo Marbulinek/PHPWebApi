@@ -112,7 +112,7 @@ class UsersController extends WebApi
         $user = $this->userLogicService->updateUserById($data);
     }
 
-    // update user by ID
+    // delete user by ID
     function deleteUserById()
     {
         //get user from json body
@@ -261,6 +261,9 @@ $user = $this->mapper->mapExactly($row, new Users());
 
 // same as mapExactly + map exactly all nested objects properties
 $user = $this->mapper->mapNested($row, new Users());
+
+// copy all results from database query, doesnt matter if its arrray or single response
+$user = $this->mapper->mapComplete($row, new Users());
 ?>
 ```
 

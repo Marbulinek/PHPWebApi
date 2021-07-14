@@ -203,7 +203,7 @@
         function build()
         {
             $result = [];
-
+            //$this->outputSQL = $this->db->escape($this->outputSQL);
             switch($this->queryState)
             {
                 case QueryState::SELECT: 

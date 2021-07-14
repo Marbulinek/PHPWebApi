@@ -16,30 +16,34 @@ class UserLogicService{
     
     function processLogin($email)
     {
-        $userFound = $this->userRepository->select()
+        if(isset($email))
+        {
+            $userFound = $this->userRepository->select()
             ->join("Auth", "`Users`.`auth_id`=`Auth`.`auth_id`")
             ->where("`email` LIKE '".$email."' ")
             ->build();
 
-        $user = $this->mapper->mapNested($userFound[0], new Users());
+            $user = $this->mapper->mapNested($userFound[0], new Users());
 
-        if($user->auth->token == null){
-            $authObj = $this->auth->generate($user->auth);
-            if($authObj != null)
-            {
-                $user->auth_id = $authObj->auth_id;
-                $user->auth->auth_id = $authObj->auth_id;
+            if($user->auth->token == null){
+                $authObj = $this->auth->generate($user->auth);
+                if($authObj != null)
+                {
+                    $user->auth_id = $authObj->auth_id;
+                    $user->auth->auth_id = $authObj->auth_id;
+                }
             }
+
+            //save users in repository
+            $this->userRepository->update($user)
+                                ->build();
+
+            // save authentification repository
+            $this->authRepository->update($user->auth)
+                                ->build();
+            return $user;
         }
-
-        //save users in repository
-        $this->userRepository->update($user)
-                             ->build();
-
-        // save authentification repository
-        $this->authRepository->update($user->auth)
-                             ->build();
-        return $user;
+        return null;
     }
 
     // get all users
@@ -49,12 +53,7 @@ class UserLogicService{
         $usersFound = $this->userRepository->select()
                                            ->join("Auth", "`Users`.`auth_id`=`Auth`.`auth_id`")
                                            ->build();
-        $result = array();
-        foreach($usersFound as $userFound)
-        {
-            $user = $this->mapper->mapNested($userFound, new Users());
-            $result[] = $user;        
-        }
+        $result = $this->mapper->mapComplete($usersFound, new Users());
         return $result;
     }
 
@@ -75,7 +74,7 @@ class UserLogicService{
                                   ->where("`user_id` LIKE '".$data["user_id"]."' ")
                                   ->build();
 
-        $user = $this->mapper->mapNested($user[0], new Users());
+        $user = $this->mapper->mapComplete($user, new Users());
         return $user;
     }
 

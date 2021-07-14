@@ -58,5 +58,23 @@ class AutoMapper
         return $destinationClass;
     }
 
+    /**
+     * Complete mapping
+     */
+    function mapComplete($sourceObjects, $destinationClass)
+    {
+        if(count($sourceObjects) > 1){
+            $result = array();
+            foreach($sourceObjects as $sourceObject)
+            {
+                $result[] = $this->mapNested($sourceObject, new $destinationClass);
+            }
+            return $result;
+        }else{
+            $result = $this->mapNested($sourceObjects[0], new $destinationClass);
+            return $result;
+        }
+    }
+
 }
 ?>
