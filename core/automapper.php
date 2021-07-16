@@ -51,6 +51,9 @@ class AutoMapper
                 {
                     $nestedClass = new $key;
                     $parentClass = $this->mapExactly($sourceObject, $nestedClass);
+                }else{
+                    $destinationClass->$key = null;
+                    continue;
                 }
                 $destinationClass->$key = $parentClass;
             }
