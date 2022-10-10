@@ -17,7 +17,6 @@ Project contains simple queries from/to database.
 | core | Contains core libraries, like automapper, webapi, repositories |
 | models | Contains custom models, like UserModel, ProductModel.. |
 | modules | Contains custom models like Authentification module or different custom specific modules |
-| models | Contains custom models, like UserModel, ProductModel.. |
 | services | Contains services for executing business logic |
 
 # EXAMPLE
