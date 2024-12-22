@@ -13,7 +13,7 @@ Project contains simple queries from/to database.
 | Folder name   |      Info      |
 |----------|:-------------:
 | api | Contains .php endpoint files which are calling controllers |
-| controls | Contains controll classes, e.g.: UserController, ProductController etc. Used for storing repositories, getting values. |
+| controllers | Contains controll classes, e.g.: UserController, ProductController etc. Used for storing repositories, getting values. |
 | core | Contains core libraries, like automapper, webapi, repositories |
 | models | Contains custom models, like UserModel, ProductModel.. |
 | modules | Contains custom models like Authentification module or different custom specific modules |
